@@ -153,8 +153,8 @@ export default function Projects() {
                 <td>{project.standar}{project.ccb === 'YES' ? (
                   <span className="text-xs"> CCB </span>
                 ) : null}
-                  {project.ccp === 'Eligible' ? (
-                    <span className="ms-1 border rounded-md bg-gray-300 text-xs"> CCP - Eligible </span>
+                  {project.ccp === 'Eligible' || project.ccp === 'Approved' ? (
+                    <span className="ms-1 border rounded-md bg-gray-300 text-xs"> CCP - {project.ccp}</span>
                   ) : null}</td>
                 <td>{project.projectID}</td>
                 <td>{project.vintage}</td>
