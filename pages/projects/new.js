@@ -32,6 +32,7 @@ export default function NewProject() {
                         <div>
                             <p> New Project </p>
                         </div>
+                        
                         <div>
                             <button onClick={goBack} className='bg-gray-300 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-200'>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">

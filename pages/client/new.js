@@ -28,6 +28,7 @@ export default function NewClient() {
             }
             {session &&
                 <>
+                
                     <div className="flex justify-between content-center">
                         <div>
                             <p> New Client </p>

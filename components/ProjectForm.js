@@ -32,6 +32,7 @@ export default function ProjectForm({
     precioCorp: existingPrecioCorp,
     floorPrice: existingFloorPrice,
     purchasePrice: existingPurchasePrice,
+    thirdPartPrice:existingThirdPartPrice,
     contrato: existingContrato,
     mktDate: existingMktDate,
     proveedor: existingProveedor,
@@ -81,6 +82,7 @@ export default function ProjectForm({
     const [precioCorp, setPrecioCorp] = useState(existingPrecioCorp || '');
     const [floorPrice, setFloorPrice] = useState(existingFloorPrice || '');
     const [purchasePrice, setPurchasePrice] = useState(existingPurchasePrice || '');
+    const [thirdPartPrice, setThirdPartPrice] = useState(existingThirdPartPrice || '');
     const [contrato, setContrato] = useState(existingContrato || '');
     const [mktDate, setMktDate] = useState(existingMktDate || '');
     const [proveedor, setProveedor] = useState(existingProveedor || '');
@@ -151,7 +153,7 @@ export default function ProjectForm({
                 brokerList, status, stage, rpStartDate,
                 rpEndDate, mailingList, sectorTD, ccb, ccp,
                 projectType, misha, regulatedMarket,
-                notas, files, notasExtra, tdInfo, icroa
+                notas, files, notasExtra, tdInfo, icroa, thirdPartPrice
             }
 
             let hasError = false;
@@ -360,7 +362,7 @@ export default function ProjectForm({
 
     return (
         <div >
-            <form onSubmit={saveProject} className='flex grid gap-3 mb-3'>
+            <form onSubmit={saveProject} className='grid gap-3 mb-3'>
                 <label className='text-gray-400'>Team *</label>
                 <select
                     className={errorFields.equipo ? 'input-error' : "border border-gray-200 bg-zinc-100/40"}
@@ -687,10 +689,18 @@ export default function ProjectForm({
                             onChange={e => setFloorPrice(e.target.value)} />
                     </div>
                     <div className='w-auto'>
+                        <label className='text-gray-400'>KarbonX Price (USD)</label>
+                        <input
+                            type='number'
+                            placeholder='ej: 3.00'
+                            value={thirdPartPrice}
+                            onChange={e => setThirdPartPrice(e.target.value)} />
+                    </div>
+                    <div className='w-auto'>
                         <label className='text-gray-400'>Purchase Price (USD)</label>
                         <input
                             type='number'
-                            placeholder='ej: 2.00'
+                            placeholder='ej: 1.90'
                             value={purchasePrice}
                             onChange={e => setPurchasePrice(e.target.value)} />
                     </div>
@@ -898,7 +908,7 @@ export default function ProjectForm({
                     <option value="ALLCOT SPAIN">ALLCOT SPAIN</option>
                     <option value="ALLCOT CENTRO-AMERICA">ALLCOT CENTRO-AMERICA</option>
                 </select>
-                {session.user.email === 'demo@gmail.com' ? (
+                {session.user.email === 'demo@gmail.com' || session.user.email === 'mdo@karbon-x.com' ? (
                     <> </>
                 ) : <>
                     <label className='text-gray-400'>Files</label>
@@ -918,7 +928,7 @@ export default function ProjectForm({
                                 <Spinner />
                             </div>
                         )}
-                        <label className="w-20 h-20 cursor-pointer text-center flex flex-col items-center justify-center text-sm gap-1 rounded-sm bg-white shadow-sm border border text-gray-400">
+                        <label className="w-20 h-20 cursor-pointer text-center flex flex-col items-center justify-center text-sm gap-1 rounded-sm bg-white shadow-sm border text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                             </svg>
@@ -933,7 +943,7 @@ export default function ProjectForm({
                     </div>
                 </>}
 
-                {session.user.email === 'demo@gmail.com' ? (
+                {session.user.email === 'demo@gmail.com'  || session.user.email === 'mdo@karbon-x.com' ? (
                     <h1 className='bg-red-300 text-center'>you are not enabled to save changes </h1>
                 ) :
                     <button type="submit" className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-400">

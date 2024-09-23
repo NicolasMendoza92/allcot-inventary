@@ -16,7 +16,7 @@ export default function Layout({ children }) {
   return (
     <div className="bg-green-600 min-h-screen ">
       {/* el hmaburgesa estara d-block en pantallas md  */}
-      <div className="block md:hidden flex items-center p-4">
+      <div className="block md:hidden items-center p-4">
         <button onClick={collapseData}>
           <svg xmlns="http://www.w3.org/2000/svg" style={{ color: "white" }} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />

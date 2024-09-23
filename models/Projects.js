@@ -124,6 +124,9 @@ const projectSchema = new Schema({
     purchasePrice: {
         type: Number,
     },
+    thirdPartPrice: {
+        type: Number,
+    },
     projectLink: {
         type: String,
     },

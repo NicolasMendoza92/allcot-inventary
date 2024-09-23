@@ -163,7 +163,7 @@ export default function HomeStandard({ projects, operations }) {
     const irecsVolumeOwn = irecsProjectsOwn.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const irecsVolumeMkt = irecsProjectsMkt.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const irecsVolumeMisha = irecsProjectsMisha.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
-    const irecsVolumeAll = irecsVolume - irecsVolumeMisha
+    const irecsVolumeAll = irecsVolume - irecsProjectsMisha
 
     const cercarbonoVolume = cercarbonoProjects.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
     const cercarbonoVolumeNow = cercarbonoProjectsNow.map(p => p.volumen).reduce((count, o) => count + parseFloat(o), 0);
