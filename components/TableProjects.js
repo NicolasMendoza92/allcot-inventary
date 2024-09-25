@@ -79,6 +79,7 @@ export const TableProjects = () => {
             label: 'Supplier',
             options: {
                 filter: false,
+                display: session?.user?.email !== 'mdo@karbon-x.com' ? true : false,
             }
         },
         {
@@ -93,6 +94,7 @@ export const TableProjects = () => {
             label: 'Purchase Price (USD)',
             options: {
                 filter: false,
+                display: session?.user?.email !== 'mdo@karbon-x.com' ? true : false,
             }
         },
         {
@@ -161,6 +163,13 @@ export const TableProjects = () => {
             }
         },
         {
+            name: 'thirdPartPrice',
+            label: 'KarbonX.Price (USD)',
+            options: {
+                filter: false,
+            }
+        },
+        {
             name: 'disponible',
             label: 'Availability',
         },
@@ -211,13 +220,6 @@ export const TableProjects = () => {
             },
         },
         {
-            name: 'icroa',
-            options: {
-                filter: true,
-                display: 'false',
-            },
-        },
-        {
             name: 'continente',
             options: {
                 filter: true,
@@ -235,6 +237,7 @@ export const TableProjects = () => {
             name: "Action",
             options: {
                 filter: false,
+                display: session?.user?.email !== 'mdo@karbon-x.com' ? true : false,
                 customBodyRender: (value, tableMeta) => (
                     <>
                         {enable === true ? (

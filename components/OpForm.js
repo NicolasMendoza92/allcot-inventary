@@ -292,6 +292,7 @@ export default function OpForm({
                         <option value="Trading">Trading</option>
                         <option value="Corporate">Corporate</option>
                         <option value="Sourcing">Sourcing</option>
+                        <option value="External">External</option>
                     </select>
                 </div>
                 <div className='flex-wrap'>
@@ -398,7 +399,7 @@ export default function OpForm({
                     placeholder='ej: creditos de Misha '
                     value={detalles}
                     onChange={e => setDetalles(e.target.value)} />
-                {session.user.email === 'demo@gmail.com' ? (
+                {session?.user.email === 'demo@gmail.com' || session?.user.email === "mdo@karbon-x.com" ? (
                     <> </>
                 ) : <>
                     <div className='mb-2 flex flex-wrap gap-1 items-center'>

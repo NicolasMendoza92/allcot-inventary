@@ -53,7 +53,7 @@ export default async function handle(req, res) {
   }
 
   if (method === 'PUT') {
-    const { transaction, equipo, cliente, proyecto, precio, versusPrice, quantity, delivery, deliveryDate, payment, paymentDate, detalles, archivos, _id } = req.body;
+    const {transaction, equipo, cliente, proyecto, precio, versusPrice, quantity, delivery, deliveryDate, payment, paymentDate, detalles, archivos, _id } = req.body;
     // definimos dos parametros, definimos el objeto que lo identifica, como el id, y luego las propiedades del objeto que queremos actualizar
     const operationDoc = await Operation.updateOne({ _id }, {
       transaction,

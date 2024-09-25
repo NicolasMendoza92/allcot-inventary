@@ -1,6 +1,7 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import Project from "@/models/Projects";
 
+
 export default async function handle(req, res) {
 
     // le pedimos que traiga toda la info que solicito , con req y lo  
@@ -75,17 +76,35 @@ export default async function handle(req, res) {
                 rpEndDate,
                 files,
                 icroa,
+                prePayment,
                 tdInfo,
                 notasExtra
             } = req.body;
+
+            // santeizacion de datos 
+            const sanitizeString = (str) => {
+                return str.replace(/[^\x00-\x7F]/g, 'na'); 
+            };
+            // const sanitizedData = {
+            //     projectID: sanitizeString(projectID),
+            //     proveedor: sanitizeString(proveedor),
+            //     notasExtra: sanitizeString(notasExtra),
+            //     notas: sanitizeString(notas),
+            //     prePayment: sanitizeString(prePayment),
+            //     name: sanitizeString(name),
+            //     projectLink: sanitizeString(projectLink),
+            //     disponible:sanitizeString(disponible)
+            // };
+
+
             const projectDoc = await Project.create({
-                projectID,
+                projectID: sanitizeString(projectID),
                 creatorUser,
                 standar,
                 vintage,
                 volumen,
-                name,
-                projectLink,
+                name:sanitizeString(name),
+                projectLink:sanitizeString(projectLink),
                 tech,
                 corsia,
                 sdg,
@@ -94,9 +113,9 @@ export default async function handle(req, res) {
                 sede,
                 pais,
                 continente,
-                notas,
+                notas:sanitizeString(notas),
                 files,
-                disponible,
+                disponible:sanitizeString(disponible),
                 stock,
                 firstCPDate,
                 precioVenta,
@@ -124,8 +143,9 @@ export default async function handle(req, res) {
                 colombianTax,
                 regulatedMarket,
                 icroa,
-                proveedor,
-                notasExtra,
+                prePayment:sanitizeString(prePayment),
+                proveedor:sanitizeString(proveedor),
+                notasExtra:sanitizeString(notasExtra),
                 tdInfo,
             })
             res.json(projectDoc);
@@ -184,6 +204,7 @@ export default async function handle(req, res) {
             notas,
             files,
             icroa,
+            prePayment,
             notasExtra,
             tdInfo,
             _id
@@ -236,6 +257,7 @@ export default async function handle(req, res) {
             regulatedMarket,
             notas,
             icroa,
+            prePayment,
             notasExtra,
             tdInfo,
             files

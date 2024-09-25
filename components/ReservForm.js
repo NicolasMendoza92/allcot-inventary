@@ -75,7 +75,7 @@ export default function ReservForm({
 
     async function newReserve(e) {
         e.preventDefault();
-        if (!customer || !team || !quantity) {
+        if (!customer || !team || !quantity || !reserveOwn) {
             setError('Important data are missing');
             return;
         }
@@ -173,6 +173,7 @@ export default function ReservForm({
                             <option value="Trading">Trading</option>
                             <option value="Corporate">Corporate</option>
                             <option value="Sourcing">Sourcing</option>
+                            <option value="External">External</option>
                         </select>
                     </div>
                     <div>
@@ -183,10 +184,9 @@ export default function ReservForm({
                             onChange={e => setReserveOwn(e.target.value)}>
                             <option value="">-no selected-</option>
                             <option value="Danna">Danna</option>
-                            <option value="Helibeth">Helibeth</option>
                             <option value="Nicolas">Nicolas</option>
-                            <option value="Laura">Laura</option>
                             <option value="William">William</option>
+                            <option value="Truc">Truc</option>
                             <option value="Monica">Monica KarbonX</option>
                         </select>
                     </div>

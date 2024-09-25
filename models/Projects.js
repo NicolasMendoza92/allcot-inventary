@@ -133,6 +133,9 @@ const projectSchema = new Schema({
     firstCPDate: {
         type: String,
     },
+    prePayment: {
+        type: String,
+    },
     icroa: {
         type: String,
     },

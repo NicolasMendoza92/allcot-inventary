@@ -9,6 +9,7 @@ import HomeStandard from "@/components/HomeStandard";
 import HomeRegulated from "@/components/HomeRegulated";
 import HomeButtons from "@/components/HomeButtons";
 import HomeTD from "@/components/HomeTD";
+import { useSession } from "next-auth/react";
 
 
 // TRAIGO LOS PROYECTOS CON GET SERVER SIDE PROPS PARA PODER USARLOS 
@@ -25,6 +26,7 @@ export async function getServerSideProps() {
 }
 
 export default function Home({operations, projects}) {
+  const { data: session } = useSession();
 
   const projectsOk = projects.filter(proj => proj.status != "On hold")
 
@@ -34,8 +36,9 @@ export default function Home({operations, projects}) {
        <HomeStandard projects={projectsOk} operations={operations}/>
       <HomeButtons projects={projectsOk}/>
       <HomeRegulated projects={projectsOk} />
-      <HomeTD projects={projectsOk} />
-      <HomeStats operations={operations}/>
+      {session?.user.email === "mdo@karbon-x.com" ? <></> : <><HomeTD projects={projectsOk} />
+      <HomeStats operations={operations}/> </>}
+      
     </Layout>
   )
 }
