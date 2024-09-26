@@ -52,7 +52,7 @@ const ExportInventKarbon = () => {
             <tr>
               <td>TEAM</td>
               <td>TYPE</td>
-              <td>MINIMUN SELLING PRICE</td>
+              <td>PRE PAYMENT</td>
               <td>STANDARD</td>
               <td>ID</td>
               <td>NAME</td>
@@ -69,7 +69,6 @@ const ExportInventKarbon = () => {
               <td>SDG</td>
               <td>NOTES</td>
               <td>P.TYPE</td>
-              <td>MARKET</td>
               <td>AVAILABILITY</td>
             </tr>
           </thead>
@@ -78,7 +77,7 @@ const ExportInventKarbon = () => {
               <tr key={pr._id}>
                 <td>{pr.equipo}</td>
                 <td>{pr.contrato}</td>
-                <td>{pr.floorPrice}</td>
+                <td>{pr.prePayment}</td>
                 <td>{pr.standar} {pr.ccb === 'YES' ? (
                   <> CCB </>
                 ) : null}</td>
@@ -99,7 +98,6 @@ const ExportInventKarbon = () => {
                 </td>
                 <td>{pr.notasExtra}</td>
                 <td>{pr.projectType}</td>
-                <td>{pr.regulatedMarket}</td>
                 <td>{pr.stock}</td>
               </tr>
             ))}

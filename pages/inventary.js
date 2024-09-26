@@ -213,7 +213,11 @@ export default function Projects() {
                   ) : (
                     <td>Supplier</td>
                   )}
-                  <td>Minimun selling price(USD)</td>
+                  {session?.user.email === "mdo@karbon-x.com" ? (
+                    <td>Pre Payment</td>
+                  ) : (
+                    <td>Minimun selling price(USD)</td>
+                  )}
                   <td>Name</td>
                   <td>Standard</td>
                   <td>ID</td>
@@ -278,7 +282,11 @@ export default function Projects() {
                       ) : (
                         <td>{project.proveedor}</td>
                       )}
-                      <td>{project.floorPrice}</td>
+                      {session?.user.email === "mdo@karbon-x.com" ? (
+                        <td>{project.prePayment}</td>
+                      ) : (
+                        <td>{project.floorPrice}</td>
+                      )}
                       <td className="text-xs">{project.name.slice(0, 25)}</td>
                       <td>
                         {project.standar}
