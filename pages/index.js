@@ -10,6 +10,7 @@ import HomeRegulated from "@/components/HomeRegulated";
 import HomeButtons from "@/components/HomeButtons";
 import HomeTD from "@/components/HomeTD";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 
 // TRAIGO LOS PROYECTOS CON GET SERVER SIDE PROPS PARA PODER USARLOS 
@@ -27,8 +28,28 @@ export async function getServerSideProps() {
 
 export default function Home({operations, projects}) {
   const { data: session } = useSession();
+  const router = useRouter();
+  function goToLogin() {
+    router.push("/login");
+  }
 
-  const projectsOk = projects.filter(proj => proj.status != "On hold")
+  const projectsOk = projects.filter(proj => proj.status != "On hold");
+
+  if (!session) {
+    return (
+      <div className="flex justify-center">
+        <div className="shadow-md p-3 bg-zinc-300/10 flex items-center gap-2 m-3">
+          <h1>You must be logged to see the dashboard</h1>
+          <button
+            className="bg-green-600 rounded-lg text-white font-bold px-6 py-2"
+            onClick={goToLogin}
+          >
+            Login
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Layout>
