@@ -719,6 +719,7 @@ export default function ProjectForm({
               <option value="CSA">CSA</option>
               <option value="PLAN VIVO">Plan Vivo</option>
               <option value="BioCarbon">BioCarbon</option>
+              <option value="COLCX">COLCX</option>
               <option value="A6.4">A6.4</option>
               <option value="A6.2">A6.2</option>
               <option value="N/A">N/A</option>

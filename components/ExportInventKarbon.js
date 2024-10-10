@@ -70,6 +70,7 @@ const ExportInventKarbon = () => {
               <td>NOTES</td>
               <td>P.TYPE</td>
               <td>AVAILABILITY</td>
+              <td>LINK</td>
             </tr>
           </thead>
           <tbody>
@@ -99,6 +100,7 @@ const ExportInventKarbon = () => {
                 <td>{pr.notasExtra}</td>
                 <td>{pr.projectType}</td>
                 <td>{pr.stock}</td>
+                <td>{pr.projectLink}</td>
               </tr>
             ))}
           </tbody>

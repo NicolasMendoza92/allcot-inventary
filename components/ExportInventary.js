@@ -73,6 +73,7 @@ const ExportInventary = () => {
               <td>SDG</td>
               <td>MISHA</td>
               <td>NOTES</td>
+              <td>LINK</td>
               <td>P.TYPE</td>
               <td>MARKET</td>
               <td>AVAILABILITY</td>
@@ -109,6 +110,7 @@ const ExportInventary = () => {
                 </td>
                 <td>{pr.misha}</td>
                 <td>{pr.notasExtra}</td>
+                <td>{pr.projectLink}</td>
                 <td>{pr.projectType}</td>
                 <td>{pr.regulatedMarket}</td>
                 <td>{pr.stock}</td>
