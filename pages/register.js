@@ -6,7 +6,7 @@ export default function Register() {
   const { data: session } = useSession();
   return (
     <div>
-      {session?.user.email === 'nm@allcot.com' ? (
+      {session?.user.email === 'nm@allcot.com' || session?.user.email === "dvp@allcot.com" ? (
         <RegisterForm />
       ) :
         <div className="flex justify-center m-auto shadow-md p-3 bg-zince-300/10 items-center gap-2">
