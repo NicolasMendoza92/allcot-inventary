@@ -70,6 +70,7 @@ const ExportInventary = () => {
               <td>CORP. PRICE</td>
               <td>PURCHASE PRICE</td>
               <td>CCP</td>
+              <td>FIRST CP DATE</td>
               <td>SDG</td>
               <td>MISHA</td>
               <td>NOTES</td>
@@ -105,6 +106,7 @@ const ExportInventary = () => {
                 <td>{pr.precioCorp}</td>
                 <td>{pr.purchasePrice}</td>
                 <td>{pr.ccp}</td>
+                <td>{pr.firstCPDate}</td>
                 <td>
                   {pr.sdgSelected.map(s => <React.Fragment key={s}>{s}*</React.Fragment>)}
                 </td>
