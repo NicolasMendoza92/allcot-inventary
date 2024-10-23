@@ -69,6 +69,7 @@ const ExportInventary = () => {
               <td>TRADING PRICE</td>
               <td>CORP. PRICE</td>
               <td>PURCHASE PRICE</td>
+              <td>PRE PAYMENT</td>
               <td>CCP</td>
               <td>FIRST CP DATE</td>
               <td>SDG</td>
@@ -105,6 +106,7 @@ const ExportInventary = () => {
                 <td>{pr.precioVenta}</td>
                 <td>{pr.precioCorp}</td>
                 <td>{pr.purchasePrice}</td>
+                <td>{pr.prePayment}</td>
                 <td>{pr.ccp}</td>
                 <td>{pr.firstCPDate}</td>
                 <td>
