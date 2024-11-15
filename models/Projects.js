@@ -1,164 +1,177 @@
 import mongoose, { Schema, model, models } from "mongoose";
 
-// creamos los modelos, para la conexion con la base de datos Mongoose-. 
-const projectSchema = new Schema({
+// creamos los modelos, para la conexion con la base de datos Mongoose-.
+const projectSchema = new Schema(
+  {
     creatorUser: {
-        type: String,
+      type: String,
     },
     projectID: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     standar: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     name: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     vintage: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     volumen: {
-        type: Number,
-        require: true,
+      type: Number,
+      require: true,
     },
     tech: {
-        type: String,
-        require: true,
+      type: String,
+      require: true,
     },
     pais: {
-        type: String,
-        require: true,
+      type: String,
+      require: true,
     },
     continente: {
-        type: String,
+      type: String,
     },
     corsia: {
-        type: String,
+      type: String,
     },
     ccb: {
-        type: String,
+      type: String,
     },
     ccp: {
-        type: String,
+      type: String,
     },
     projectType: {
-        type: String,
+      type: String,
     },
     colombianTax: {
-        type: String,
+      type: String,
     },
     regulatedMarket: {
-        type: String,
+      type: String,
     },
     misha: {
-        type: String,
+      type: String,
     },
     mailingList: {
-        type: String,
+      type: String,
     },
     brokerList: {
-        type: String,
+      type: String,
     },
     sdg: {
-        type: String,
+      type: String,
     },
     sdgSelected: [{ type: String }],
     sdgImages: [{ type: String }],
     sede: {
-        type: String,
+      type: String,
     },
     contrato: {
-        type: String,
+      type: String,
     },
     equipo: {
-        type: String,
+      type: String,
     },
     // TD fields
     tdService: {
-        type: String,
+      type: String,
     },
     typeOfContract: {
-        type: String,
+      type: String,
     },
     sectorTD: {
-        type: String,
+      type: String,
     },
     status: {
-        type: String,
+      type: String,
     },
     stage: {
-        type: String,
+      type: String,
     },
     rpStartDate: {
-        type: String,
+      type: String,
     },
     rpEndDate: {
-        type: String,
+      type: String,
     },
     actualDataVolume: {
-        type: Number,
+      type: Number,
     },
     netVolume: {
-        type: Number,
+      type: Number,
     },
     mktDate: {
-        type: Date,
+      type: Date,
     },
     // Cambia a financial partner cuando se selecciona TD
     proveedor: {
-        type: String,
+      type: String,
     },
     precioVenta: {
-        type: Number,
+      type: Number,
     },
     precioCorp: {
-        type: Number,
+      type: Number,
     },
     floorPrice: {
-        type: Number,
+      type: Number,
     },
     purchasePrice: {
-        type: Number,
+      type: Number,
     },
     thirdPartPrice: {
-        type: Number,
+      type: Number,
     },
     projectLink: {
-        type: String,
+      type: String,
     },
     firstCPDate: {
-        type: String,
+      type: String,
     },
     prePayment: {
-        type: String,
+      type: String,
     },
     icroa: {
+      type: String,
+    },
+    methodology: {
+      type: String,
+    },
+    registrationDate: {
+      type: Date,
+    },
+    buyerCountry: {
+      type: [String],
+    },
+    dubleCountingRisk: {
         type: String,
     },
     disponible: {
-        type: String,
+      type: String,
     },
     stock: {
-        type: String,
+      type: String,
     },
     notas: {
-        type: String,
+      type: String,
     },
     notasExtra: {
-        type: String,
+      type: String,
     },
     tdInfo: {
-        type: String,
+      type: String,
     },
     files: [{ type: String }],
-},
-    {
-        timestamps: true,
-    }
+  },
+  {
+    timestamps: true,
+  }
 );
 
 const Project = models.Project || mongoose.model("Project", projectSchema);

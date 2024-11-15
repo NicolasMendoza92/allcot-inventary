@@ -258,7 +258,7 @@ export default function CountryPFSelect({ pais, setPais, setContinente, continen
 
 
     return (
-        <div>
+        <>
             <div>
                 <label className='text-gray-400'>Host Country *</label>
                 <select
@@ -276,6 +276,6 @@ export default function CountryPFSelect({ pais, setPais, setContinente, continen
                 <label className='text-gray-400' >Continent </label>
                 <input type="text" value={continente} readOnly />
             </div>
-        </div>
+        </>
     )
 }

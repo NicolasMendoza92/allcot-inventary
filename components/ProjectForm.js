@@ -55,6 +55,10 @@ export default function ProjectForm({
   ccp: existingCcp,
   projectType: existingProjectType,
   icroa: existingIcroa,
+  methodology: existingMethodology,
+  registrationDate: existingRegistrationDate,
+  buyerCountry: existingBuyerCountry,
+  doubleCountingRisk: exisitngDoubleCountingRisk,
   prePayment: existingPrePayment,
   regulatedMarket: existingRegulatedMarket,
   sdgSelected: existingSdgSelected,
@@ -115,6 +119,14 @@ export default function ProjectForm({
   const [regulatedMarket, setRegulatedMarket] = useState(
     existingRegulatedMarket || ""
   );
+  const [methodology, setMethodology] = useState(existingMethodology || "");
+  const [registrationDate, setRegistrationDate] = useState(
+    existingRegistrationDate || ""
+  );
+  const [doubleCountingRisk, setDoubleCountingRisk] = useState(
+    exisitngDoubleCountingRisk || ""
+  );
+  const [buyerCountry, setBuyerCountry] = useState(existingBuyerCountry || []);
   const [sede, setSede] = useState(existingSede || "");
   const [notas, setNotas] = useState(existingNotas || "");
   const [notasExtra, setNotasExtra] = useState(existingNotasExtra || "");
@@ -126,6 +138,7 @@ export default function ProjectForm({
   const [checkedState, setCheckedState] = useState(
     new Array(sdgList.length).fill(false)
   );
+
 
   const { data: session } = useSession();
 
@@ -195,6 +208,10 @@ export default function ProjectForm({
         notasExtra,
         tdInfo,
         icroa,
+        methodology,
+        registrationDate,
+        buyerCountry,
+        doubleCountingRisk,
         prePayment,
         thirdPartPrice,
       };
@@ -390,6 +407,18 @@ export default function ProjectForm({
     } else {
       setSectorTD(sectorTD);
       setTdInfo("");
+    }
+  };
+
+ 
+  // Formula para seleccionar varios countries
+  const countries = ["Japan", "Singapore", "South Korea", "Switzerland"];
+  const handleBuyCountrySelectionChange = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setBuyerCountry((prev) => [...prev, value]); // Añade el país seleccionado
+    } else {
+      setBuyerCountry((prev) => prev.filter((country) => country !== value)); // Elimina el país deseleccionado
     }
   };
 
@@ -761,6 +790,24 @@ export default function ProjectForm({
               <option value="Approved">Approved</option>
             </select>
           </div>
+          <div>
+            <label className="text-gray-400">Methodology</label>
+            <input
+              type="text"
+              placeholder="ex:Methane emission "
+              value={methodology}
+              onChange={(e) => setMethodology(e.target.value)}
+            />
+            {/* <select
+              className=" border border-gray-200 bg-zinc-100/40"
+              value={ccp}
+              onChange={(e) => setCcp(e.target.value)}
+            >
+              <option value="">-no seleccionado-</option>
+              <option value="Eligible">Eligible</option>
+              <option value="Approved">Approved</option>
+            </select> */}
+          </div>
         </div>
         <div className="flex flex-wrap gap-2 ">
           <div className="w-auto">
@@ -920,6 +967,30 @@ export default function ProjectForm({
           setContinente={setContinente}
           errorFields={errorFields}
         />
+        {/* AÑADO EL SELECT BUYER COUNTRY */}
+        <div>
+          <label className="text-gray-400">Buyer Country</label>
+          <div className="mt-2 space-y-2 grid grid-cols-1 md:flex md:gap-2">
+            {countries.map((country) => (
+              <div key={country} className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id={country}
+                  value={country}
+                  checked={buyerCountry.includes(country)}
+                  onChange={handleBuyCountrySelectionChange}
+                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                />
+                <label htmlFor={country} className="text-gray-700">
+                  {country}
+                </label>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 text-gray-400 text-sm">
+            Selected countries: {buyerCountry.join(", ")}
+          </p>
+        </div>
         <div className="flex flex-wrap gap-2">
           <div className="w-32">
             <label className="text-gray-400">TYPE</label>
@@ -958,6 +1029,34 @@ export default function ProjectForm({
               onChange={(e) => setFirstCPDate(e.target.value)}
             />
           </div>
+          <div>
+            <label className="text-gray-400">Registration date</label>
+            <input
+              type="date"
+              className="flex border border-gray-200 bg-zinc-100/40 w-42"
+              value={
+                registrationDate
+                  ? new Date(registrationDate).toISOString().slice(0, 10)
+                  : registrationDate
+              }
+              onChange={(e) => setRegistrationDate(e.target.value)}
+            />
+          </div>
+          <div className="w-32">
+            <label className="text-gray-400">D.C. Risk</label>
+            <select
+              className=" border border-gray-200 bg-zinc-100/40"
+              value={doubleCountingRisk}
+              onChange={(e) => setDoubleCountingRisk(e.target.value)}
+            >
+              <option value="">-no selected-</option>
+              <option value="Letter of Intend">Letter of Intend</option>
+              <option value="Letter of Approval">Letter of Approval</option>
+              <option value="Correspondent Adjustments">
+                Correspondent Adjustments
+              </option>
+            </select>
+          </div>
           <div className="w-32">
             <label className="text-gray-400">Regulated MKT</label>
             <select
@@ -969,6 +1068,7 @@ export default function ProjectForm({
               <option value="Colombia">Colombia</option>
               <option value="Chile">Chile</option>
               <option value="Queretaro">Queretaro</option>
+              <option value="Brazil">Brazil</option>
             </select>
           </div>
           <div className="w-32">
