@@ -149,7 +149,7 @@ const projectSchema = new Schema(
     buyerCountry: {
       type: [String],
     },
-    dubleCountingRisk: {
+    doubleCountingRisk: {
         type: String,
     },
     disponible: {
