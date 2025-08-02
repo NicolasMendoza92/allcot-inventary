@@ -56,7 +56,7 @@ export default function Home({operations, projects}) {
       <UserInfo/>
        <HomeStandard projects={projectsOk} operations={operations}/>
       <HomeButtons projects={projectsOk}/>
-      {session?.user.email === "mdo@karbon-x.com" ? <></> : <><HomeRegulated projects={projectsOk} /> <HomeTD projects={projectsOk} />
+      {session?.user.email === "demo@gmail.com" ? <></> : <><HomeRegulated projects={projectsOk} /> <HomeTD projects={projectsOk} />
       <HomeStats operations={operations}/> </>}
       
     </Layout>

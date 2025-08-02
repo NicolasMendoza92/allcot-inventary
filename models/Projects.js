@@ -1,6 +1,5 @@
 import mongoose, { Schema, model, models } from "mongoose";
 
-// creamos los modelos, para la conexion con la base de datos Mongoose-.
 const projectSchema = new Schema(
   {
     creatorUser: {
@@ -109,7 +108,6 @@ const projectSchema = new Schema(
     mktDate: {
       type: Date,
     },
-    // Cambia a financial partner cuando se selecciona TD
     proveedor: {
       type: String,
     },

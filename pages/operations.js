@@ -77,19 +77,10 @@ export default function Operations() {
     );
   }
 
-  const filteredOperations =
-    session?.user?.email === "mdo@karbon-x.com"
-      ? operationFinded.filter((op) => op.equipo === "External")
-      : operationFinded;
-
   return (
     <Layout>
       <div className="flex justify-between content-center">
-        {session?.user?.email === "mdo@karbon-x.com" ? (
-          <></>
-        ) : (
           <ExportOperations />
-        )}
 
         <div className="flex justify-end content-center">
           <div className="flex items-center">
@@ -101,9 +92,6 @@ export default function Operations() {
               autoFocus
             />
           </div>
-          {session?.user?.email === "mdo@karbon-x.com" ? (
-            <></>
-          ) : (
             <Link
               className="bg-gray-300 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-200"
               href={"/searchOperations"}
@@ -123,7 +111,6 @@ export default function Operations() {
                 />
               </svg>
             </Link>
-          )}
         </div>
       </div>
 
@@ -156,7 +143,7 @@ export default function Operations() {
                 </td>
               </tr>
             )}
-            {filteredOperations.map((op) => (
+            {operationFinded.map((op) => (
               <tr key={op._id}>
                 <td>
                   {new Date(op.createdAt).toLocaleString("GB-English", {

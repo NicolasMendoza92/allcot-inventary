@@ -498,9 +498,7 @@ export default function ProjectForm({
               />
             </div>
           </div>
-          {session?.user?.email === "mdo@karbon-x.com" ? (
-            <></>
-          ) : (
+
             <div className=" w-full">
               <label className="text-gray-400">Internal Notes</label>
               <textarea
@@ -510,7 +508,6 @@ export default function ProjectForm({
                 maxLength={1200}
               />
             </div>
-          )}
         </div>
         <label className="text-gray-400">Contract Type</label>
         <select
@@ -1167,9 +1164,6 @@ export default function ProjectForm({
           value={notasExtra}
           onChange={(e) => setNotasExtra(e.target.value)}
         />
-        {session?.user?.email === "mdo@karbon-x.com" ? (
-          <></>
-        ) : (
           <>
             <label className="text-gray-400">Storage location (SAP)</label>
             <select
@@ -1187,9 +1181,7 @@ export default function ProjectForm({
               </option>
             </select>
           </>
-        )}
-        {session.user.email === "demo@gmail.com" ||
-        session.user.email === "mdo@karbon-x.com" ? (
+        {session.user.email === "demo@gmail.com" ? (
           <> </>
         ) : (
           <>
@@ -1255,8 +1247,7 @@ export default function ProjectForm({
           </>
         )}
 
-        {session.user.email === "demo@gmail.com" ||
-        session.user.email === "mdo@karbon-x.com" ? (
+        {session.user.email === "demo@gmail.com" ? (
           <h1 className="bg-red-300 text-center">
             you are not enabled to save changes{" "}
           </h1>

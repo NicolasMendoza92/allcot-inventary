@@ -69,7 +69,7 @@ export default function TdProjects() {
 
   return (
     <Layout>
-      {session?.user?.email === "mdo@karbon-x.com" ? (
+      {session?.user?.email === "demo@gmail.com" ? (
         <div className=" text-center">
           {" "}
           You are not allowed to see the this page

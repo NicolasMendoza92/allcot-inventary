@@ -51,7 +51,6 @@ export default function Projects() {
     });
   }
 
-
   // para el filtro
   const { projectSearched, setProjectSearched } =
     useContext(ProjectSearchContext);
@@ -143,27 +142,17 @@ export default function Projects() {
                     />
                   </svg>
                 </Link>
-                {session?.user.email === "mdo@karbon-x.com" ? (
-                  <ExportInventKarbon />
-                ) : (
-                  <ExportInventary />
-                )}
+                <ExportInventary />
               </div>
             )}
             {enable === true && (
               <>
-                {session?.user?.email !== "mdo@karbon-x.com" ? (
-                  <>
-                    <Link
-                      className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 "
-                      href={"/projects/new"}
-                    >
-                      New project
-                    </Link>
-                  </>
-                ) : (
-                  <></>
-                )}
+                <Link
+                  className="bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 "
+                  href={"/projects/new"}
+                >
+                  New project
+                </Link>
                 <div className="flex justify-end">
                   <div className="flex justify-start items-center">
                     <input
@@ -193,11 +182,7 @@ export default function Projects() {
                       />
                     </svg>
                   </Link>
-                  {session?.user.email === "mdo@karbon-x.com" ? (
-                    <ExportInventKarbon />
-                  ) : (
-                    <ExportInventary />
-                  )}
+                  <ExportInventary />
                 </div>
               </>
             )}
@@ -208,16 +193,9 @@ export default function Projects() {
                 <tr>
                   <td>Source</td>
                   <td>Type</td>
-                  {session?.user.email === "mdo@karbon-x.com" ? (
-                    <></>
-                  ) : (
-                    <td>Supplier</td>
-                  )}
-                  {session?.user.email === "mdo@karbon-x.com" ? (
-                    <td>Pre Payment</td>
-                  ) : (
-                    <td>Minimun selling price(USD)</td>
-                  )}
+                  <td>Supplier</td>
+                  <td>Pre Payment</td>
+                  <td>Minimun selling price(USD)</td>
                   <td>Name</td>
                   <td>Standard</td>
                   <td>ID</td>
@@ -229,11 +207,7 @@ export default function Projects() {
                   <td>Trading Price(USD)</td>
                   <td>Corp. Price(USD)</td>
                   <td>KarbonX. Price(USD)</td>
-                  {session?.user.email === "mdo@karbon-x.com" ? (
-                    <></>
-                  ) : (
-                    <td>Purch. Price(USD)</td>
-                  )}
+                  <td>Purch. Price(USD)</td>
                   <td>CCP</td>
                   <td>Availability</td>
                   <td></td>
@@ -277,16 +251,12 @@ export default function Projects() {
                           </span>
                         ) : null}
                       </td>
-                      {session?.user.email === "mdo@karbon-x.com" ? (
-                        <></>
-                      ) : (
+
                         <td>{project.proveedor}</td>
-                      )}
-                      {session?.user.email === "mdo@karbon-x.com" ? (
+
                         <td>{project.prePayment}</td>
-                      ) : (
                         <td>{project.floorPrice}</td>
-                      )}
+
                       <td className="text-xs">{project.name.slice(0, 25)}</td>
                       <td>
                         {project.standar}
@@ -310,11 +280,8 @@ export default function Projects() {
                       <td>{project.precioVenta}</td>
                       <td>{project.precioCorp}</td>
                       <td>{project.thirdPartPrice}</td>
-                      {session?.user.email === "mdo@karbon-x.com" ? (
-                        <></>
-                      ) : (
+    
                         <td>{project.purchasePrice}</td>
-                      )}
                       <td>{project.ccp}</td>
                       <td className="hidden">{project.stock}</td>
                       <td className="hidden">{project.projectType}</td>
@@ -409,9 +376,7 @@ export default function Projects() {
                               </span>
                             </div>
                           </Link>
-                          {session?.user.email === "mdo@karbon-x.com" ? (
-                            <></>
-                          ) : (
+
                             <Link
                               className="bg-gray-300 text-white px-1  ms-1 rounded shadow-sm hover:bg-gray-200"
                               href={"/projects/edit/" + project._id}
@@ -438,7 +403,7 @@ export default function Projects() {
                                 </span>
                               </div>
                             </Link>
-                          )}
+
                           <Link
                             className="bg-orange-600 text-white px-1 ms-1 rounded shadow-sm hover:bg-orange-500"
                             href={"/projects/reservation/" + project._id}

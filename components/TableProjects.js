@@ -76,7 +76,6 @@ export const TableProjects = () => {
       label: "Supplier",
       options: {
         filter: false,
-        display: session?.user?.email !== "mdo@karbon-x.com" ? true : false,
       },
     },
     {
@@ -84,7 +83,6 @@ export const TableProjects = () => {
       label: "Min Selling Price (USD)",
       options: {
         filter: false,
-        display: session?.user?.email !== "mdo@karbon-x.com" ? true : false,
       },
     },
     {
@@ -92,7 +90,6 @@ export const TableProjects = () => {
       label: "Purchase Price (USD)",
       options: {
         filter: false,
-        display: session?.user?.email !== "mdo@karbon-x.com" ? true : false,
       },
     },
     {
@@ -169,9 +166,6 @@ export const TableProjects = () => {
     {
       name: "prePayment",
       label: "Pre Payment",
-      options: {
-        display: session?.user?.email !== "mdo@karbon-x.com" ? false : true,
-      },
     },
     {
       name: "disponible",
@@ -241,7 +235,6 @@ export const TableProjects = () => {
       name: "Action",
       options: {
         filter: false,
-        display: session?.user?.email !== "mdo@karbon-x.com" ? true : false,
         customBodyRender: (value, tableMeta) => (
           <>
             {enable === true ? (
@@ -275,7 +268,7 @@ export const TableProjects = () => {
     },
   ];
 
-  const isUserRestricted = session?.user?.email === "mdo@karbon-x.com";
+  const isUserRestricted = session?.user?.email === "demo@mail.com";
 
   const options = {
     filterType: "multiselect",

@@ -138,7 +138,7 @@ export default function EditReservePage() {
                             <p> Edit reservation </p>
                         </div>
                         <div className='flex gap-2'>
-                            {session.user?.email === 'wp.co@allcot.com' ? (
+                            {session.user?.email === 'demo@gmail.com' ? (
                                 <>
                                     <button className="bg-gray-300 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-gray-200" >
                                         <Link href={'/reservations'}>

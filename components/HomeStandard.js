@@ -409,10 +409,6 @@ export default function HomeStandard({ projects, operations }) {
 
   return (
     <div className="">
-      {session?.user?.email === "mdo@karbon-x.com" ? (
-        <></>
-      ) : (
-        <>
           {deliverToday.length > 0 || payToday.length > 0 ? (
             <h1 className="board-card-alert adverts-pending text-center my-3">
               You have{" "}
@@ -426,8 +422,6 @@ export default function HomeStandard({ projects, operations }) {
               payments pendings that require your action TODAY
             </h1>
           ) : null}
-        </>
-      )}
 
       <h1 className="home-stats-titles">Available by standard</h1>
       <div className="board-grid">

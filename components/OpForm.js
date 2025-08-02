@@ -399,7 +399,7 @@ export default function OpForm({
                     placeholder='ej: creditos de Misha '
                     value={detalles}
                     onChange={e => setDetalles(e.target.value)} />
-                {session?.user.email === 'demo@gmail.com' || session?.user.email === "mdo@karbon-x.com" ? (
+                {session?.user.email === 'demo@gmail.com' ? (
                     <> </>
                 ) : <>
                     <div className='mb-2 flex flex-wrap gap-1 items-center'>

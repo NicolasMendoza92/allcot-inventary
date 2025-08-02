@@ -62,13 +62,11 @@ export default function Reservations() {
     );
   }
 
-  // Define el nombre del usuario específico
-  const specificUser = "mdo@karbon-x.com";
+  const specificUser = "demo@gmail.com";
 
-  // Filtra las reservas solo si el usuario es el específico
   const filteredReservations =
     session?.user?.email === specificUser
-      ? reservations.filter((r) => r.reserveOwn === "Monica")
+      ? reservations.filter((r) => r.reserveOwn === "Demo")
       : reservations;
 
   return (

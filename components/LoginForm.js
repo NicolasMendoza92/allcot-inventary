@@ -2,6 +2,7 @@
 
 import { signIn } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -62,7 +63,7 @@ export default function LoginForm() {
                         type="text"
                         placeholder="Email"
                     />
-                    <div className="flex inline-flex items-center">
+                    <div className="flex items-center">
                         <input
                             className="px-2 py-2"
                             onChange={(e) => setPassword(e.target.value)}
@@ -83,6 +84,9 @@ export default function LoginForm() {
                     <button className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2">
                         Login
                     </button>
+                    <Link className="text-sm m-auto" href={"/register"}>
+                     <span className="underline">Register</span> new user 
+                    </Link>
 
                     {error && (
                         <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">

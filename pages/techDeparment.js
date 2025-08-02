@@ -198,9 +198,6 @@ export default function techDeparment() {
         </div>
       ) : (
         <>
-          {session?.user?.email === "mdo@karbon-x.com" ? (
-            <> </>
-          ) : (
             <div className="flex justify-center">
               <Link
                 className=" bg-green-600 text-white px-3 py-1 ms-1 mt-1 rounded shadow-sm hover:bg-green-500 "
@@ -210,7 +207,7 @@ export default function techDeparment() {
                 See Project list
               </Link>
             </div>
-          )}
+
           <div className="p-3">
             <h1 className="home-stats-titles mt-3">SECTOR</h1>
             <div className="board-grid">
