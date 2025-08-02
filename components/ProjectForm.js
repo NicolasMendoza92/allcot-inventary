@@ -7,13 +7,13 @@ import { sdgList } from "./ProjectForm/SdgOptions";
 import SdgSelected from "./ProjectForm/SdgSelected";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import TdSection from "./ProjectForm/TDSection";
 import ProjectDetailsSection from "./ProjectForm/ProjectDetailsSection";
 import ProjectPricingSection from "./ProjectForm/ProjectPricingSection";
 import ProjectDataSection from "./ProjectForm/ProjectDataSection";
 import ProjectAdditionalSection from "./ProjectForm/ProjectAdditionalSection";
 import ProjectContractSection from "./ProjectForm/ProjectContractSection";
 import FileUploaderSection from "./FileUpleaderSection";
+import TdSection from "./ProjectForm/TDSection";
 
 export default function ProjectForm({
   _id,
@@ -320,15 +320,6 @@ export default function ProjectForm({
     }
   };
 
-  const hanldeContrato = (e) => {
-    const contrato = e.target.value;
-    if (contrato === "MKT") {
-      setContrato(contrato);
-    } else {
-      setContrato(contrato);
-      setMktDate("");
-    }
-  };
 
   const hanldeEquipo = (e) => {
     const equipo = e.target.value;
