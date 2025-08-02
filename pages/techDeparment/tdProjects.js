@@ -65,7 +65,7 @@ export default function TdProjects() {
       });
       setProjectFinded(searchedProjects);
     }
-  }, [projectSearched, projects]);
+  }, [projectSearched, projects, projectsTd]);
 
   return (
     <Layout>

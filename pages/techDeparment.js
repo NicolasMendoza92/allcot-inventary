@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 
-export default function techDeparment() {
+export default function TechDeparment() {
   const { data: session } = useSession();
   const { setProjectSearched } = useContext(ProjectSearchContext);
 
