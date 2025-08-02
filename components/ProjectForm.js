@@ -13,7 +13,7 @@ import ProjectDataSection from "./ProjectForm/ProjectDataSection";
 import ProjectAdditionalSection from "./ProjectForm/ProjectAdditionalSection";
 import ProjectContractSection from "./ProjectForm/ProjectContractSection";
 import FileUploaderSection from "./FileUpleaderSection";
-import TDSection from "./ProjectForm/TDSection";
+import ProjectTdSection from "./ProjectForm/ProjectTdSection";
 
 export default function ProjectForm({
   _id,
@@ -421,7 +421,7 @@ export default function ProjectForm({
         />
         {/*  si selecciono equipo TD */}
         {equipo === "TD" && (
-          <TDSection
+          <ProjectTdSection
             sectorTD={sectorTD}
             hanldeSectorTd={hanldeSectorTd}
             tdService={tdService}
