@@ -1,7 +1,7 @@
 // TdSection.jsx
 import React from "react";
 
-const TdSection = ({
+const TDSection = ({
   sectorTD,
   hanldeSectorTd,
   tdService,
@@ -168,4 +168,4 @@ const TdSection = ({
   );
 };
 
-export default TdSection;
+export default TDSection;
