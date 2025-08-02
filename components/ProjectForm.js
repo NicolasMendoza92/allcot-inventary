@@ -1,8 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import Spinner from "./Spinner";
-import Swal from "sweetalert2";
 import ArrowUp from "./ArrowUp";
 import ArrowDown from "./ArrowDown";
 import { sdgList } from "./ProjectForm/SdgOptions";
