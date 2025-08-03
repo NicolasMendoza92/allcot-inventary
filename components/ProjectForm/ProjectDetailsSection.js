@@ -1,10 +1,11 @@
 
 import React from "react";
 import StandardSelect from "./StandardSelect";
+import useProjectFormStore from "@/store/projectFromStore";
 
 
-const ProjectDetailsSection = ({
-  projectID,
+const ProjectDetailsSection = ()  =>  {
+  const {projectID,
   setProjectId,
   vintage,
   setVintage,
@@ -16,8 +17,7 @@ const ProjectDetailsSection = ({
   setCorsia,
   ccp,
   setCcp,
-  errorFields, 
-}) => {
+  errorFields } = useProjectFormStore();
   return (
     <div className="flex flex-wrap gap-2">
       <div>

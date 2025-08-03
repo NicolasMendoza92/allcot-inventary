@@ -1,21 +1,20 @@
-
+import useProjectFormStore from "@/store/projectFromStore";
 import React from "react";
 
-const PricingSection = ({
-  volumen,
-  setVolumen,
-  precioVenta,
-  setPrecioVenta,
-  precioCorp,
-  setPrecioCorp,
-  floorPrice,
-  setFloorPrice,
-  // thirdPartPrice,
-  // setThirdPartPrice,
-  purchasePrice,
-  setPurchasePrice,
-  errorFields, 
-}) => {
+const PricingSection = () => {
+  const {
+    volumen,
+    setVolumen,
+    precioVenta,
+    setPrecioVenta,
+    precioCorp,
+    setPrecioCorp,
+    floorPrice,
+    setFloorPrice,
+    purchasePrice,
+    setPurchasePrice,
+    errorFields,
+  } = useProjectFormStore();
   return (
     <div className="flex flex-wrap gap-2">
       <div className="w-auto">

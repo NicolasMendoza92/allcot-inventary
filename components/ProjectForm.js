@@ -21,46 +21,9 @@ export default function ProjectForm({ _id, existingData }) {
   const router = useRouter();
   // llamo a Zustand para acceder a las partes del estado que necesitamos
   const {
-    projectID,
-    standar,
-    vintage,
-    volumen,
-    name,
-    projectLink,
-    tech,
-    corsia,
     sdg,
-    pais,
-    continente,
-    disponible,
-    stock,
-    precioVenta,
-    precioCorp,
-    floorPrice,
-    purchasePrice,
-    thirdPartPrice,
-    contrato,
-    mktDate,
-    proveedor,
-    mailingList,
-    brokerList,
-    misha,
     equipo,
-    tdService,
-    typeOfContract,
-    actualDataVolume,
-    netVolume,
-    sectorTD,
-    status,
-    stage,
-    rpStartDate,
-    rpEndDate,
-    ccb,
-    ccp,
-    prePayment,
-    methodology,
     sede,
-    notas,
     notasExtra,
     files, 
     sdgSelected,
@@ -69,46 +32,7 @@ export default function ProjectForm({ _id, existingData }) {
     showModal,
     error,
     errorFields,
-    setField, // Genérico
-    setProjectId,
-    setStandar,
-    setVintage,
-    setVolumen,
-    setName,
-    setProjectLink,
-    setTech,
-    setCorsia,
-    setSdg, 
-    setPais,
-    setContinente,
-    setDisponible,
-    setStock,
-    setPrecioVenta,
-    setPrecioCorp,
-    setFloorPrice,
-    setPurchasePrice,
-    setThirdPartPrice,
-    setContrato,
-    setMktDate,
-    setProveedor,
-    setMailingList,
-    setBrokerList,
-    setMisha,
     setEquipo, 
-    setTdService, 
-    setTypeOfContract,
-    setActualDataVolume,
-    setNetVolume,
-    setSectorTD, 
-    setStatus, 
-    setStage,
-    setRpStartDate,
-    setRpEndDate,
-    setCcb,
-    setCcp,
-    setPrePayment,
-    setMethodology,
-    setNotas,
     setNotasExtra,
     setFiles, 
     setSdgSelected,
@@ -116,6 +40,7 @@ export default function ProjectForm({ _id, existingData }) {
     setCheckedState,
     setShowModal,
     setError,
+    setSede,
     setErrorFields,
     initializeForm, 
     setSdgListLength, 
@@ -266,98 +191,17 @@ export default function ProjectForm({ _id, existingData }) {
           <option value="TD">TD</option>
         </select>
         <ProjectContractSection
-          equipo={equipo}
-          proveedor={proveedor}
-          setProveedor={setProveedor}
-          misha={misha}
-          setMisha={setMisha}
-          mailingList={mailingList}
-          setMailingList={setMailingList}
-          brokerList={brokerList}
-          setBrokerList={setBrokerList}
-          prePayment={prePayment}
-          setPrePayment={setPrePayment}
-          notas={notas}
-          setNotas={setNotas}
-          contrato={contrato}
-          setContrato={setContrato}
-          mktDate={mktDate}
-          setMktDate={setMktDate}
-          errorFields={errorFields}
           disablePastDate={disablePastDate}
         />
         {/*  si selecciono equipo TD */}
         {equipo === "TD" && (
-          <ProjectTdSection
-           sectorTD={sectorTD}
-            hanldeSectorTd={(e) => setSectorTD(e.target.value)} 
-            tdService={tdService}
-            hanldeTdService={(e) => setTdService(e.target.value)} 
-            typeOfContract={typeOfContract}
-            setTypeOfContract={setTypeOfContract}
-            status={status}
-            hanldeStatus={(e) => setStatus(e.target.value)} 
-            stage={stage}
-            setStage={setStage}
-            rpStartDate={rpStartDate}
-            setRpStartDate={setRpStartDate}
-            rpEndDate={rpEndDate}
-            setRpEndDate={setRpEndDate}
-            actualDataVolume={actualDataVolume}
-            setActualDataVolume={setActualDataVolume}
-            netVolume={netVolume}
-            setNetVolume={setNetVolume}
-          />
+          <ProjectTdSection/>
         )}
         {equipo === "Commercial" && <></>}
 
-        <ProjectDetailsSection
-          projectID={projectID}
-          setProjectId={setProjectId}
-          vintage={vintage}
-          setVintage={setVintage}
-          standar={standar}
-          setStandar={setStandar}
-          ccb={ccb}
-          setCcb={setCcb}
-          corsia={corsia}
-          setCorsia={setCorsia}
-          ccp={ccp}
-          setCcp={setCcp}
-          errorFields={errorFields}
-        />
-        <ProjectPricingSection
-          volumen={volumen}
-          setVolumen={setVolumen}
-          precioVenta={precioVenta}
-          setPrecioVenta={setPrecioVenta}
-          precioCorp={precioCorp}
-          setPrecioCorp={setPrecioCorp}
-          floorPrice={floorPrice}
-          setFloorPrice={setFloorPrice}
-          purchasePrice={purchasePrice}
-          setPurchasePrice={setPurchasePrice}
-          errorFields={errorFields}
-        />
-        <ProjectDataSection
-          name={name}
-          setName={setName}
-          projectLink={projectLink}
-          setProjectLink={setProjectLink}
-          tech={tech}
-          setTech={setTech}
-          pais={pais}
-          setPais={setPais}
-          continente={continente}
-          setContinente={setContinente}
-          disponible={disponible}
-          setDisponible={setDisponible}
-          methodology={methodology}
-          setMethodology={setMethodology}
-          stock={stock}
-          setStock={setStock}
-          errorFields={errorFields}
-        />
+        <ProjectDetailsSection/>
+        <ProjectPricingSection/>
+        <ProjectDataSection/>
 
         <ProjectAdditionalSection
           countries={countries}

@@ -1,24 +1,29 @@
+import useProjectFormStore from "@/store/projectFromStore";
+
 export default function ProjectContractSection({
-  equipo,
-  proveedor,
-  setProveedor,
-  misha,
-  setMisha,
-  mailingList,
-  setMailingList,
-  brokerList,
-  setBrokerList,
-  prePayment,
-  setPrePayment,
-  notas,
-  setNotas,
-  contrato,
-  setContrato,
-  mktDate,
-  setMktDate,
-  errorFields,
   disablePastDate,
 }) {
+   const {
+    equipo, 
+    proveedor,
+    setProveedor,
+    misha,
+    setMisha,
+    mailingList,
+    setMailingList,
+    brokerList,
+    setBrokerList,
+    prePayment,
+    setPrePayment,
+    notas,
+    setNotas,
+    contrato,
+    setContrato,
+    mktDate,
+    setMktDate,
+    errorFields, 
+  } = useProjectFormStore();
+
   const hanldeContrato = (e) => {
     const val = e.target.value;
     setContrato(val);

@@ -1,26 +1,41 @@
-
+import useProjectFormStore from "@/store/projectFromStore";
 import React from "react";
 
-const ProjectTdSection = ({
-  sectorTD,
-  hanldeSectorTd,
-  tdService,
-  hanldeTdService,
-  typeOfContract,
-  setTypeOfContract,
-  status,
-  hanldeStatus,
-  stage,
-  setStage,
-  rpStartDate,
-  setRpStartDate,
-  rpEndDate,
-  setRpEndDate,
-  actualDataVolume,
-  setActualDataVolume,
-  netVolume,
-  setNetVolume,
-}) => {
+const ProjectTdSection = () => {
+  const {
+    sectorTD,
+    setSectorTD, // Usar directamente el setter del store
+    tdService,
+    setTdService, // Usar directamente el setter del store
+    typeOfContract,
+    setTypeOfContract,
+    status,
+    setStatus, // Usar directamente el setter del store
+    stage,
+    setStage,
+    rpStartDate,
+    setRpStartDate,
+    rpEndDate,
+    setRpEndDate,
+    actualDataVolume,
+    setActualDataVolume,
+    netVolume,
+    setNetVolume,
+  } = useProjectFormStore();
+
+  const hanldeSectorTdInternal = (e) => {
+    setSectorTD(e.target.value); 
+  };
+
+  const hanldeTdServiceInternal = (e) => {
+
+    setTdService(e.target.value); 
+  };
+
+  const hanldeStatusInternal = (e) => {
+    // Renombrado
+    setStatus(e.target.value); 
+  };
   return (
     <>
       <label className="text-sm text-green-600 font-bold">TD Fields</label>
@@ -30,7 +45,7 @@ const ProjectTdSection = ({
           <select
             className="border border-gray-200 bg-zinc-100/40"
             value={sectorTD}
-            onChange={(e) => hanldeSectorTd(e)}
+           onChange={hanldeSectorTdInternal}
           >
             <option value="">-no seleccionado-</option>
             <option value="NBS AFRICA">NBS AFRICA</option>
@@ -45,7 +60,7 @@ const ProjectTdSection = ({
           <select
             className="border border-gray-200 bg-zinc-100/40"
             value={tdService}
-            onChange={(e) => hanldeTdService(e)}
+            onChange={hanldeTdServiceInternal}
           >
             <option value="">-no seleccionado-</option>
             <option value="CONS">CONS</option>
@@ -85,7 +100,7 @@ const ProjectTdSection = ({
           <select
             className=" border border-gray-200 bg-zinc-100/40"
             value={status}
-            onChange={(e) => hanldeStatus(e)}
+            onChange={hanldeStatusInternal}
           >
             <option value="">-no seleccionado-</option>
             <option value="Ongoing">Ongoing</option>

@@ -2,9 +2,10 @@
 import React from "react";
 import TechSelect from "./TechSelect";
 import CountryPFSelect from "./CountryPFSelect";
+import useProjectFormStore from "@/store/projectFromStore";
 
-const ProjectDataSection = ({
-  name,
+const ProjectDataSection = () => {
+  const { name,
   setName,
   projectLink,
   setProjectLink,
@@ -20,8 +21,7 @@ const ProjectDataSection = ({
   setMethodology,
   stock,
   setStock,
-  errorFields,
-}) => {
+  errorFields} = useProjectFormStore();
   return (
     <>
       <label className="text-gray-400">Project&apos;s Name *</label>
