@@ -1,6 +1,7 @@
 import ProjectForm from '@/components/ProjectForm';
 import Spinner from '@/components/Spinner';
 import Layout from '@/components/layout';
+import useProjectFormStore from '@/store/projectFromStore';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
@@ -13,11 +14,12 @@ export default function EditProjectPage() {
   // traemos la informacion del producto 
   const [projectInfo, setProjectInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
   const router = useRouter();
   // traemos la propiedad id, de router.query, ya que nos fiamos previamente con un console log donde estaba el file [...id]  que creamos con console.log({router});
   const { id } = router.query;
 
+  const initializeForm = useProjectFormStore((state) => state.initializeForm);
+  const resetForm = useProjectFormStore((state) => state.reset);
 
   useEffect(() => {
     if (!id) {
@@ -26,9 +28,10 @@ export default function EditProjectPage() {
     setIsLoading(true);
     axios.get('/api/projects?id=' + id).then(response => {
       setProjectInfo(response.data);
+      initializeForm(response.data)
       setIsLoading(false);
     })
-  }, [id]);
+  }, [id, initializeForm]);
 
   function goToLogin() {
     router.push('/login')
@@ -87,11 +90,7 @@ export default function EditProjectPage() {
 
             )
           }
-          {
-            projectInfo && (
-              <ProjectForm {...projectInfo} />
-            )
-          }
+          {!isLoading && <ProjectForm _id={id} />}
         </>
       }
 

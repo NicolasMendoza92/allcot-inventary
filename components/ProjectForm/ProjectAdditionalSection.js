@@ -1,25 +1,40 @@
 
+import useProjectFormStore from "@/store/projectFromStore";
 import React from "react";
 
 const ProjectAdditionalSection = ({
   countries, 
-  buyerCountry,
-  handleBuyCountrySelectionChange,
-  projectType,
-  setProjectType,
-  icroa,
-  setIcroa,
-  firstCPDate,
-  setFirstCPDate,
-  registrationDate,
-  setRegistrationDate,
-  doubleCountingRisk,
-  setDoubleCountingRisk,
-  regulatedMarket,
-  setRegulatedMarket,
-  sdg,
-  hanldeSdg, 
 }) => {
+  const {
+    buyerCountry, 
+    setBuyerCountry, 
+    projectType,
+    setProjectType,
+    icroa,
+    setIcroa,
+    firstCPDate,
+    setFirstCPDate,
+    registrationDate,
+    setRegistrationDate,
+    doubleCountingRisk,
+    setDoubleCountingRisk,
+    regulatedMarket,
+    setRegulatedMarket,
+    sdg,
+    setSdg,
+  } = useProjectFormStore();
+  
+const handleBuyCountrySelectionChange = (e) => {
+  const { value, checked } = e.target;
+
+  const updated =
+    checked && !buyerCountry.includes(value)
+      ? [...buyerCountry, value]
+      : buyerCountry.filter((c) => c !== value);
+
+  setBuyerCountry(updated);
+};
+
   return (
     <>
       <div>
@@ -31,7 +46,7 @@ const ProjectAdditionalSection = ({
                 type="checkbox"
                 id={country}
                 value={country}
-                checked={buyerCountry.includes(country)}
+                checked={(Array.isArray(buyerCountry) ? buyerCountry : []).includes(country)}
                 onChange={handleBuyCountrySelectionChange}
                 className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
@@ -42,7 +57,7 @@ const ProjectAdditionalSection = ({
           ))}
         </div>
         <p className="mt-4 text-gray-400 text-sm">
-          Selected countries: {buyerCountry.join(", ")}
+          Selected countries: { (Array.isArray(buyerCountry) ? buyerCountry : []).join(", ")}
         </p>
       </div>
 
@@ -131,7 +146,7 @@ const ProjectAdditionalSection = ({
           <select
             className=" border border-gray-200 bg-zinc-100/40"
             value={sdg}
-            onChange={(e) => hanldeSdg(e)}
+            onChange={(e) => setSdg(e.target.value)}
           >
             <option value="">-no selected-</option>
             <option value="NO">No</option>

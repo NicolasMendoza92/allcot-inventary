@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect } from "react";
 import ArrowUp from "./ArrowUp";
 import ArrowDown from "./ArrowDown";
 import { sdgList } from "./ProjectForm/SdgOptions";
@@ -14,363 +14,120 @@ import ProjectAdditionalSection from "./ProjectForm/ProjectAdditionalSection";
 import ProjectContractSection from "./ProjectForm/ProjectContractSection";
 import FileUploaderSection from "./FileUpleaderSection";
 import ProjectTdSection from "./ProjectForm/ProjectTdSection";
+import useProjectFormStore from "@/store/projectFromStore";
 
-export default function ProjectForm({
-  _id,
-  projectID: existingProjectID,
-  standar: existingStandar,
-  vintage: existingVintage,
-  volumen: existingVolumen,
-  name: existingName,
-  projectLink: existingProjectLink,
-  tech: existingTech,
-  corsia: existingCorsia,
-  sdg: existingSdg,
-  pais: existingPais,
-  continente: existingContinente,
-  disponible: existingDisponible,
-  stock: existingStock,
-  precioVenta: existingPrecioVenta,
-  precioCorp: existingPrecioCorp,
-  floorPrice: existingFloorPrice,
-  purchasePrice: existingPurchasePrice,
-  thirdPartPrice: existingThirdPartPrice,
-  contrato: existingContrato,
-  mktDate: existingMktDate,
-  proveedor: existingProveedor,
-  sede: existingSede,
-  misha: existingMisha,
-  mailingList: existingMailingList,
-  brokerList: existingBrokerList,
-  equipo: existingEquipo,
-  tdService: existingTdService,
-  typeOfContract: existingTypeOfContract,
-  actualDataVolume: existingActualDataVolume,
-  netVolume: existingNetVolume,
-  sectorTD: existingSectorTD,
-  status: existingStatus,
-  stage: existingStage,
-  rpStartDate: existingRpStartDate,
-  rpEndDate: existingRpEndDate,
-  firstCPDate: existingFirstCPDate,
-  notas: existingNotas,
-  notasExtra: existingNotasExtra,
-  ccb: existingCcb,
-  ccp: existingCcp,
-  projectType: existingProjectType,
-  icroa: existingIcroa,
-  methodology: existingMethodology,
-  registrationDate: existingRegistrationDate,
-  buyerCountry: existingBuyerCountry,
-  doubleCountingRisk: exisitngDoubleCountingRisk,
-  prePayment: existingPrePayment,
-  regulatedMarket: existingRegulatedMarket,
-  sdgSelected: existingSdgSelected,
-  sdgImages: existingSdgImages,
-  tdInfo: existingTdInfo,
-  files: existingFiles,
-}) {
-  // creamos los usestate para manejar las variables y los inputs. (los estados pueden tomar el valor, del existente o vacio, en el caso de que toque edit)
-  const [projectID, setProjectId] = useState(existingProjectID || "");
-  const [standar, setStandar] = useState(existingStandar || "");
-  const [vintage, setVintage] = useState(existingVintage || "");
-  const [volumen, setVolumen] = useState(existingVolumen || "");
-  const [name, setName] = useState(existingName || "");
-  const [projectLink, setProjectLink] = useState(existingProjectLink || "");
-  const [tech, setTech] = useState(existingTech || "");
-  const [corsia, setCorsia] = useState(existingCorsia || "");
-  const [sdg, setSdg] = useState(existingSdg || "");
-  const [pais, setPais] = useState(existingPais || "");
-  const [continente, setContinente] = useState(existingContinente || "");
-  const [disponible, setDisponible] = useState(existingDisponible || "");
-  const [stock, setStock] = useState(existingStock || "");
-  const [precioVenta, setPrecioVenta] = useState(existingPrecioVenta || "");
-  const [precioCorp, setPrecioCorp] = useState(existingPrecioCorp || "");
-  const [floorPrice, setFloorPrice] = useState(existingFloorPrice || "");
-  const [purchasePrice, setPurchasePrice] = useState(
-    existingPurchasePrice || ""
-  );
-  const [thirdPartPrice, setThirdPartPrice] = useState(
-    existingThirdPartPrice || ""
-  );
-  const [contrato, setContrato] = useState(existingContrato || "");
-  const [mktDate, setMktDate] = useState(existingMktDate || "");
-  const [proveedor, setProveedor] = useState(existingProveedor || "");
-  const [mailingList, setMailingList] = useState(existingMailingList || "");
-  const [brokerList, setBrokerList] = useState(existingBrokerList || "");
-  const [misha, setMisha] = useState(existingMisha || "");
-  const [equipo, setEquipo] = useState(existingEquipo || "");
-  // CAMPOS DE TD
-  const [tdService, setTdService] = useState(existingTdService || "");
-  const [typeOfContract, setTypeOfContract] = useState(
-    existingTypeOfContract || ""
-  );
-  const [actualDataVolume, setActualDataVolume] = useState(
-    existingActualDataVolume || ""
-  );
-  const [netVolume, setNetVolume] = useState(existingNetVolume || "");
-  const [sectorTD, setSectorTD] = useState(existingSectorTD || "");
-  const [status, setStatus] = useState(existingStatus || "");
-  const [stage, setStage] = useState(existingStage || "");
-  const [rpStartDate, setRpStartDate] = useState(existingRpStartDate || "");
-  const [rpEndDate, setRpEndDate] = useState(existingRpEndDate || "");
-  const [firstCPDate, setFirstCPDate] = useState(existingFirstCPDate || "");
-  const [ccb, setCcb] = useState(existingCcb || "");
-  const [ccp, setCcp] = useState(existingCcp || "");
-  const [icroa, setIcroa] = useState(existingIcroa || "");
-  const [prePayment, setPrePayment] = useState(existingPrePayment || "");
-  const [projectType, setProjectType] = useState(existingProjectType || "");
-  const [regulatedMarket, setRegulatedMarket] = useState(
-    existingRegulatedMarket || ""
-  );
-  const [methodology, setMethodology] = useState(existingMethodology || "");
-  const [registrationDate, setRegistrationDate] = useState(
-    existingRegistrationDate || ""
-  );
-  const [doubleCountingRisk, setDoubleCountingRisk] = useState(
-    exisitngDoubleCountingRisk || ""
-  );
-  const [buyerCountry, setBuyerCountry] = useState(existingBuyerCountry || []);
-  const [sede, setSede] = useState(existingSede || "");
-  const [notas, setNotas] = useState(existingNotas || "");
-  const [notasExtra, setNotasExtra] = useState(existingNotasExtra || "");
-  const [files, setFiles] = useState(existingFiles || []);
-  const [tdInfo, setTdInfo] = useState(existingTdInfo || "");
-  // SDG states to handle
-  const [sdgSelected, setSdgSelected] = useState(existingSdgSelected || []);
-  const [sdgImages, setSdgImages] = useState(existingSdgImages || []);
-  const [checkedState, setCheckedState] = useState(
-    new Array(sdgList.length).fill(false)
-  );
-
+export default function ProjectForm({ _id, existingData }) {
   const { data: session } = useSession();
-
-  const [isUploading, setIsUploading] = useState(false);
-
-  // Modal y estados para mostrar SDGs
-  const [showModal, setShowModal] = useState(false);
-  const showAllSdg = (e) => {
-    e.preventDefault(e);
-    setShowModal((prev) => !prev);
-  };
-
-  // handle errors
-  const [error, setError] = useState("");
-  const [errorFields, setErrorFields] = useState({});
   const router = useRouter();
+  // llamo a Zustand para acceder a las partes del estado que necesitamos
+  const {
+    projectID,
+    standar,
+    vintage,
+    volumen,
+    name,
+    projectLink,
+    tech,
+    corsia,
+    sdg,
+    pais,
+    continente,
+    disponible,
+    stock,
+    precioVenta,
+    precioCorp,
+    floorPrice,
+    purchasePrice,
+    thirdPartPrice,
+    contrato,
+    mktDate,
+    proveedor,
+    mailingList,
+    brokerList,
+    misha,
+    equipo,
+    tdService,
+    typeOfContract,
+    actualDataVolume,
+    netVolume,
+    sectorTD,
+    status,
+    stage,
+    rpStartDate,
+    rpEndDate,
+    ccb,
+    ccp,
+    prePayment,
+    methodology,
+    sede,
+    notas,
+    notasExtra,
+    files, 
+    sdgSelected,
+    sdgImages,
+    checkedState,
+    showModal,
+    error,
+    errorFields,
+    setField, // Genérico
+    setProjectId,
+    setStandar,
+    setVintage,
+    setVolumen,
+    setName,
+    setProjectLink,
+    setTech,
+    setCorsia,
+    setSdg, 
+    setPais,
+    setContinente,
+    setDisponible,
+    setStock,
+    setPrecioVenta,
+    setPrecioCorp,
+    setFloorPrice,
+    setPurchasePrice,
+    setThirdPartPrice,
+    setContrato,
+    setMktDate,
+    setProveedor,
+    setMailingList,
+    setBrokerList,
+    setMisha,
+    setEquipo, 
+    setTdService, 
+    setTypeOfContract,
+    setActualDataVolume,
+    setNetVolume,
+    setSectorTD, 
+    setStatus, 
+    setStage,
+    setRpStartDate,
+    setRpEndDate,
+    setCcb,
+    setCcp,
+    setPrePayment,
+    setMethodology,
+    setNotas,
+    setNotasExtra,
+    setFiles, 
+    setSdgSelected,
+    setSdgImages,
+    setCheckedState,
+    setShowModal,
+    setError,
+    setErrorFields,
+    initializeForm, 
+    setSdgListLength, 
+  } = useProjectFormStore();
 
-  async function saveProject(e) {
-    e.preventDefault();
-
-    try {
-      const data = {
-        projectID,
-        cretorUser: session?.user?.email,
-        standar,
-        vintage,
-        volumen,
-        name,
-        projectLink,
-        tech,
-        corsia,
-        sdg,
-        sede,
-        sdgSelected,
-        sdgImages,
-        pais,
-        continente,
-        disponible,
-        stock,
-        firstCPDate,
-        precioVenta,
-        precioCorp,
-        floorPrice,
-        purchasePrice,
-        contrato,
-        mktDate,
-        proveedor,
-        equipo,
-        tdService,
-        typeOfContract,
-        actualDataVolume,
-        netVolume,
-        brokerList,
-        status,
-        stage,
-        rpStartDate,
-        rpEndDate,
-        mailingList,
-        sectorTD,
-        ccb,
-        ccp,
-        projectType,
-        misha,
-        regulatedMarket,
-        notas,
-        files,
-        notasExtra,
-        tdInfo,
-        icroa,
-        methodology,
-        registrationDate,
-        buyerCountry,
-        doubleCountingRisk,
-        prePayment,
-        thirdPartPrice,
-      };
-
-      let hasError = false;
-      let newErrorFields = {};
-
-      // Validación
-      if (!projectID) {
-        hasError = true;
-        newErrorFields.projectID = true;
-      }
-      if (!equipo) {
-        hasError = true;
-        newErrorFields.equipo = true;
-      }
-      if (!standar) {
-        hasError = true;
-        newErrorFields.standar = true;
-      }
-      if (!vintage) {
-        hasError = true;
-        newErrorFields.vintage = true;
-      }
-      if (!volumen) {
-        hasError = true;
-        newErrorFields.volumen = true;
-      }
-      if (!tech) {
-        hasError = true;
-        newErrorFields.tech = true;
-      }
-      if (!pais) {
-        hasError = true;
-        newErrorFields.pais = true;
-      }
-      if (!name) {
-        hasError = true;
-        newErrorFields.name = true;
-      }
-      if (!stock) {
-        hasError = true;
-        newErrorFields.stock = true;
-      }
-      if (!contrato) {
-        hasError = true;
-        newErrorFields.stock = true;
-      }
-
-      if (hasError) {
-        setError("Important data are missing");
-        setErrorFields(newErrorFields);
-        return;
-      }
-
-      if (_id) {
-        //update
-        await axios.put("/api/projects", { ...data, _id });
-      } else {
-        //create
-        const res = await axios.post("/api/projects", data);
-      }
-
-      setError("");
-      setErrorFields({});
-
-      router.back();
-    } catch (error) {
-      console.log(error);
+  useEffect(() => {
+    if (existingData) {
+      initializeForm(existingData);
     }
-  }
-
-  const handleChangeSdg = (e, position) => {
-    const { value, checked } = e.target;
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : item
-    );
-    if (checked) {
-      setSdgSelected([...sdgSelected, value]);
-    } else {
-      setSdgSelected(sdgSelected.filter((sdg) => sdg !== value));
-    }
-    setCheckedState(updatedCheckedState);
-
-    const selectedSdgImg = [];
-    updatedCheckedState.map((currentState, index) => {
-      if (currentState === true) {
-        const images = sdgList[index].img;
-        selectedSdgImg.push(images);
-      }
-    });
-    setSdgImages(selectedSdgImg);
-  };
-
-  const hanldeSdg = (e) => {
-    const ods = e.target.value;
-    if (ods === "NO" || ods === "N/A") {
-      setSdgImages([]);
-      setSdgSelected([]);
-      setSdg(ods);
-    } else {
-      setSdg(ods);
-    }
-  };
-
-
-  const hanldeEquipo = (e) => {
-    const equipo = e.target.value;
-    if (equipo === "TD") {
-      setEquipo(equipo);
-    } else {
-      setEquipo(equipo);
-    }
-  };
-
-  const hanldeStatus = (e) => {
-    const status = e.target.value;
-    if (status === "Ongoing") {
-      setStatus(status);
-    } else {
-      setStatus(status);
-    }
-  };
-
-  const hanldeTdService = (e) => {
-    const tdService = e.target.value;
-    if (tdService !== "") {
-      setTdInfo("Yes");
-      setTdService(tdService);
-    } else {
-      setTdService(tdService);
-      setTdInfo("");
-    }
-  };
-
-  const hanldeSectorTd = (e) => {
-    const sectorTD = e.target.value;
-    if (sectorTD !== "") {
-      setTdInfo("Yes");
-      setSectorTD(sectorTD);
-    } else {
-      setSectorTD(sectorTD);
-      setTdInfo("");
-    }
-  };
-
-  // Formula para seleccionar varios countries
-  const countries = ["Japan", "Singapore", "South Korea", "Switzerland"];
-  const handleBuyCountrySelectionChange = (e) => {
-    const { value, checked } = e.target;
-    if (checked) {
-      setBuyerCountry((prev) => [...prev, value]); // Añade el país seleccionado
-    } else {
-      setBuyerCountry((prev) => prev.filter((country) => country !== value)); // Elimina el país deseleccionado
-    }
-  };
+    // Inicializar checkedState según sdgList.length
+    setSdgListLength(sdgList.length);
+  }, [existingData, initializeForm, setSdgListLength]);
 
   // Formula para editar el datepicker
   const disablePastDate = () => {
@@ -379,6 +136,116 @@ export default function ProjectForm({
     const mm = String(today.getMonth() + 1).padStart(2, "0");
     const yyyy = today.getFullYear();
     return yyyy + "-" + mm + "-" + dd;
+  };
+
+  // Paises para el buyer country
+  const countries = ["Japan", "Singapore", "South Korea", "Switzerland"];
+
+  async function saveProject(e) {
+    e.preventDefault();
+
+    try {
+      const formData = useProjectFormStore.getState();
+
+      let hasError = false;
+      let newErrorFields = {};
+
+      // Validación 
+      if (!formData.projectID) {
+        hasError = true;
+        newErrorFields.projectID = true;
+      }
+      if (!formData.equipo) {
+        hasError = true;
+        newErrorFields.equipo = true;
+      }
+      if (!formData.standar) {
+        hasError = true;
+        newErrorFields.standar = true;
+      }
+      if (!formData.vintage) {
+        hasError = true;
+        newErrorFields.vintage = true;
+      }
+      if (!formData.volumen) {
+        hasError = true;
+        newErrorFields.volumen = true;
+      }
+      if (!formData.tech) {
+        hasError = true;
+        newErrorFields.tech = true;
+      }
+      if (!formData.pais) {
+        hasError = true;
+        newErrorFields.pais = true;
+      }
+      if (!formData.name) {
+        hasError = true;
+        newErrorFields.name = true;
+      }
+      if (!formData.stock) {
+        hasError = true;
+        newErrorFields.stock = true;
+      }
+      if (!formData.contrato) {
+        hasError = true;
+        newErrorFields.contrato = true; 
+      }
+
+      if (hasError) {
+        setError("Important data are missing"); 
+        setErrorFields(newErrorFields); 
+        return;
+      }
+
+      if (_id) {
+        //update
+        await axios.put("/api/projects", { ...formData, _id });
+      } else {
+        //create
+        const res = await axios.post("/api/projects", formData);
+      }
+
+      setError("");
+      setErrorFields({});
+
+      router.back();
+    } catch (error) {
+      console.log(error);
+      setError("An error occurred while saving the project.");
+    }
+  }
+
+  const handleChangeSdg = (e, position) => {
+    const { value, checked } = e.target;
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+    setCheckedState(updatedCheckedState); 
+
+    let currentSdgSelected = sdgSelected; 
+    if (checked) {
+      currentSdgSelected = [...currentSdgSelected, value];
+    } else {
+      currentSdgSelected = currentSdgSelected.filter(
+        (sdgItem) => sdgItem !== value
+      );
+    }
+    setSdgSelected(currentSdgSelected); 
+    const selectedSdgImg = [];
+    updatedCheckedState.forEach((currentState, index) => {
+      if (currentState === true) {
+        const images = sdgList[index].img;
+        selectedSdgImg.push(images);
+      }
+    });
+    setSdgImages(selectedSdgImg); 
+  };
+
+
+  const showAllSdgHandler = (e) => {
+    e.preventDefault();
+    setShowModal(!showModal);
   };
 
   return (
@@ -392,7 +259,7 @@ export default function ProjectForm({
               : "border border-gray-200 bg-zinc-100/40"
           }
           value={equipo}
-          onChange={(e) => hanldeEquipo(e)}
+          onChange={(e) => setEquipo(e.target.value)}
         >
           <option value="">-no selected-</option>
           <option value="Commercial">Commercial</option>
@@ -422,14 +289,14 @@ export default function ProjectForm({
         {/*  si selecciono equipo TD */}
         {equipo === "TD" && (
           <ProjectTdSection
-            sectorTD={sectorTD}
-            hanldeSectorTd={hanldeSectorTd}
+           sectorTD={sectorTD}
+            hanldeSectorTd={(e) => setSectorTD(e.target.value)} 
             tdService={tdService}
-            hanldeTdService={hanldeTdService}
+            hanldeTdService={(e) => setTdService(e.target.value)} 
             typeOfContract={typeOfContract}
             setTypeOfContract={setTypeOfContract}
             status={status}
-            hanldeStatus={hanldeStatus}
+            hanldeStatus={(e) => setStatus(e.target.value)} 
             stage={stage}
             setStage={setStage}
             rpStartDate={rpStartDate}
@@ -468,8 +335,6 @@ export default function ProjectForm({
           setPrecioCorp={setPrecioCorp}
           floorPrice={floorPrice}
           setFloorPrice={setFloorPrice}
-          // thirdPartPrice={thirdPartPrice}
-          // setThirdPartPrice={setThirdPartPrice}
           purchasePrice={purchasePrice}
           setPurchasePrice={setPurchasePrice}
           errorFields={errorFields}
@@ -496,22 +361,6 @@ export default function ProjectForm({
 
         <ProjectAdditionalSection
           countries={countries}
-          buyerCountry={buyerCountry}
-          handleBuyCountrySelectionChange={handleBuyCountrySelectionChange}
-          projectType={projectType}
-          setProjectType={setProjectType}
-          icroa={icroa}
-          setIcroa={setIcroa}
-          firstCPDate={firstCPDate}
-          setFirstCPDate={setFirstCPDate}
-          registrationDate={registrationDate}
-          setRegistrationDate={setRegistrationDate}
-          doubleCountingRisk={doubleCountingRisk}
-          setDoubleCountingRisk={setDoubleCountingRisk}
-          regulatedMarket={regulatedMarket}
-          setRegulatedMarket={setRegulatedMarket}
-          sdg={sdg}
-          hanldeSdg={hanldeSdg}
         />
         <SdgSelected sdgImages={sdgImages} />
         {sdg === "YES" && (
@@ -522,7 +371,7 @@ export default function ProjectForm({
               them again.
             </span>
             <button
-              onClick={showAllSdg}
+              onClick={showAllSdgHandler}
               className="flex flex-wrap align-center w-fit bg-zinc-100/40 text-black px-3 py-1 ms-1 mt-1 rounded  "
             >
               Select which ones {showModal ? <ArrowUp /> : <ArrowDown />}
@@ -540,7 +389,7 @@ export default function ProjectForm({
                             name={name}
                             value={name}
                             checked={checkedState[index]}
-                            onChange={(e) => handleChangeSdg(e, index)}
+                           onChange={(e) => handleChangeSdg(e, index)}
                           />
                           <label className="ms-2 text-sm font-medium text-gray-800">
                             <Image

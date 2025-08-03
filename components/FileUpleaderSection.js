@@ -1,11 +1,10 @@
-
 import React, { useState } from "react";
-import axios from "axios"; 
-import Swal from "sweetalert2"; 
+import axios from "axios";
+import Swal from "sweetalert2";
 import Spinner from "./Spinner";
 
-
 const FileUploaderSection = ({ files, setFiles, session }) => {
+  console.log(files);
 
   const [isUploading, setIsUploading] = useState(false);
 
@@ -20,9 +19,9 @@ const FileUploaderSection = ({ files, setFiles, session }) => {
       }
       try {
         const res = await axios.post("/api/upload", data);
-        setFiles((oldFiles) => {
-          return [...oldFiles, ...res.data.links];
-        });
+        const safeOldFiles = Array.isArray(files) ? files : [];
+        const newFiles = [...safeOldFiles, ...res.data.links];
+        setFiles(newFiles);
       } catch (error) {
         console.error("Error uploading files:", error);
         Swal.fire({
@@ -50,7 +49,8 @@ const FileUploaderSection = ({ files, setFiles, session }) => {
         reverseButtons: true,
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const newFiles = files.filter((value) => value !== link);
+          const safeFiles = Array.isArray(files) ? files : [];
+          const newFiles = safeFiles.filter((value) => value !== link);
           setFiles(newFiles);
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
@@ -65,17 +65,18 @@ const FileUploaderSection = ({ files, setFiles, session }) => {
     }
   }
 
-
   if (session.user.email === "demo@gmail.com") {
-    return null; 
+    return null;
   }
+
+  const displayFiles = Array.isArray(files) ? files : [];
 
   return (
     <>
       <label className="text-gray-400">Files</label>
       <div className="mb-2 flex flex-wrap gap-1 items-center">
-        {!!files?.length &&
-          files.map((link) => (
+        {!!displayFiles?.length &&
+          displayFiles.map((link) => (
             <div
               key={link}
               className="relative flex h-20 bg-white p-4 shadow-sm rounded-sm border border-gray-200"
@@ -113,7 +114,6 @@ const FileUploaderSection = ({ files, setFiles, session }) => {
         )}
 
         <label className="w-20 h-20 cursor-pointer text-center flex flex-col items-center justify-center text-sm gap-1 rounded-sm bg-white shadow-sm border text-gray-400">
-
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -131,7 +131,7 @@ const FileUploaderSection = ({ files, setFiles, session }) => {
           <div>Upload file</div>
           <input type="file" onChange={uploadFiles} className="hidden" />
         </label>
-        {!files?.length && !isUploading && (
+        {!displayFiles?.length && !isUploading && (
           <div className="text-gray-400"> No attached files </div>
         )}
       </div>
